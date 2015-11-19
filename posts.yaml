@@ -1,8 +1,10 @@
----
-- message: >
+- message: |
     Some random shit
   date: 11/18/2015
 - message: >
-    Some other random shit that probably doesn't mean anything but
-    thats normal cause this is francisco
+    Some other random shit that probably doesn't mean anything but thats normal
+    cause this is francisco
   date: 11/18/2015
+- date: 2015-11-19T10:49:18.926Z
+  message: >
+    whatever nonsense francisco says
