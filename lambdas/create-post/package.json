@@ -1,0 +1,11 @@
+{
+  "name": "shitfrancisco-create-post",
+  "version": "1.0.0",
+  "description": "create post lambda",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sean McCollum <anincrediblyshortname@gmail.com>",
+  "license": "ISC"
+}

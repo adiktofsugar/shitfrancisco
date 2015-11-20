@@ -4,6 +4,15 @@ body {
     padding: 0;
     color: #333;
 }
+.error {
+    clear: both;
+    font-size: 100px;
+    background: white;
+    margin-top: 50px;
+    padding: 200px 2em;
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+}
+
 .title {
     font-family: "Helvetica Neue", Helvetica, sans-serif;
     font-size: 35px;
@@ -11,6 +20,7 @@ body {
     padding: 10px;
     float: right;
 }
+
 .posts {
     clear: both;
 }

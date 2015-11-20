@@ -1,6 +1,6 @@
 module.exports = function runLambda(lambda, event, callback) {
     var context = {
-        success: markSuccess,
+        succeed: markSuccess,
         fail: markFail
     };
 

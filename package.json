@@ -12,6 +12,8 @@
   "author": "Sean McCollum <anincrediblyshortname@gmail.com>",
   "license": "ISC",
   "devDependencies": {
+    "async": "^1.5.0",
+    "aws-sdk": "^2.2.18",
     "js-yaml": "^3.4.3",
     "minimist": "^1.2.0",
     "nunjucks": "^2.1.0"
