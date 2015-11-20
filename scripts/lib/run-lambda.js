@@ -1,7 +1,8 @@
-module.exports = function runLambda(lambda, event, callback) {
+module.exports = function runLambda(isLocal, lambda, event, callback) {
     var context = {
         succeed: markSuccess,
-        fail: markFail
+        fail: markFail,
+        isLocal: isLocal
     };
 
     var doneArgs;

@@ -5,28 +5,25 @@ var fs = require('fs');
 var path = require('path');
 
 var usage = `
-build [-h]
+build [-h][-r]
+    -h help
+    -r perform remote
 Builds the html
 `
-var argv = require('minimist')(process.argv.slice(2));
+var argv = require('minimist')(process.argv.slice(2), {
+    boolean: ['h', 'r']
+});
 if (argv.h || argv.help) {
     console.log(usage);
     process.exit();
 }
+var isLocal = !argv.r;
 
 console.log("building remote index");
-require('../lambdas/lib/build')(function (error) {
+require('../lambdas/lib/build')(isLocal, function (error) {
     if (error) {
         console.error(error);
         return process.exit(1);
     }
-    s3.getObject({
-        Bucket: 'shitfrancisco',
-        Key: 'index.html',
-    }, function (error, file) {
-        if (error) console.error(error) && process.exit(1);
-        var projectRoot = path.resolve(__dirname, '..');
-        fs.writeFileSync(projectRoot + '/public/index.html', file.Body);
-        console.log("Wrote index locally");
-    });
+    console.log("built " + (isLocal ? "locally" : "remotely"));
 });

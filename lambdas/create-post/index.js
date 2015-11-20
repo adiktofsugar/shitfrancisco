@@ -11,27 +11,20 @@ exports.handler = function (event, context) {
         date: new Date(),
         message: event.message
     };
-    s3.listBuckets({
-    }, function (error, data) {
+    var isLocal = context.isLocal;
+    postsUpdater.get(isLocal, function (error, posts) {
         if (error) return context.fail(error);
-        var buckets = data.Buckets;
-        buckets.forEach(function (bucket) {
-            console.log("bucket name " + bucket.Name);
-        });
-        postsUpdater.get(function (error, posts) {
+        if (!posts) {
+            posts = [];
+        }
+        newPost.id = posts.length;
+        posts.push(newPost);
+        postsUpdater.update(isLocal, posts, function (error) {
             if (error) return context.fail(error);
-            if (!posts) {
-                posts = [];
-            }
-            newPost.id = posts.length;
-            posts.push(newPost);
-            postsUpdater.update(posts, function (error) {
+            require('../lib/build')(isLocal, function (error) {
                 if (error) return context.fail(error);
-                require('../lib/build')(function (error) {
-                    if (error) return context.fail(error);
-                    context.succeed(newPost);
-                });
-            })
-        });
+                context.succeed(newPost);
+            });
+        })
     });
 };
