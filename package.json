@@ -9,7 +9,7 @@
     "stop": "forever stopall",
     "log": "forever logs -f server.js",
     "dev": "npm run build; npm run stop; npm run start; npm run log",
-    "prod": "./scripts/aws-install-assets.sh; ./scripts/aws-install-lambdas.sh; ./scripts/build.js -r"
+    "prod": "./scripts/aws-install.js; ./scripts/build.js -r"
   },
   "author": "Sean McCollum <anincrediblyshortname@gmail.com>",
   "license": "ISC",
