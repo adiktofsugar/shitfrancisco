@@ -17,7 +17,7 @@ exports.handler = function (event, context) {
         if (!posts) {
             posts = [];
         }
-        newPost.id = posts.length;
+        newPost.id = newPost.date.getTime();
         posts.push(newPost);
         postsUpdater.update(isLocal, posts, function (error) {
             if (error) return context.fail(error);

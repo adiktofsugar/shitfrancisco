@@ -19,7 +19,6 @@ if (argv.h || argv.help) {
 }
 var isLocal = !argv.r;
 
-console.log("building remote index");
 require('../lambdas/lib/build')(isLocal, function (error) {
     if (error) {
         console.error(error);

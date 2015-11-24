@@ -64,7 +64,8 @@ function get(isLocal, callback) {
 
 function update(isLocal, newPosts, callback) {
     if (callback === undefined) {
-        callback = isLocal;
+        callback = newPosts;
+        newPosts = isLocal;
         isLocal = false;
     }
     try {

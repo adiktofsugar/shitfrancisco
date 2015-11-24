@@ -13,6 +13,7 @@
         <ul>
             {% for post in posts %}
             <li>
+                <a href="#" data-post-id="{{ post.id }}" class="delete-button">[x]</a>
                 <date>{{ post.date }}</date>
                 <p>{{ post.message }}</p>
             </li>
@@ -23,10 +24,59 @@
         {% endif %}
     </div>
     <div class="add">
-        <form action="" method="post">
+        <form id="create-message">
             <textarea name="message" placeholder="New shit francisco just said"></textarea>
             <button type="submit">Add newish thing</button>
         </form>
     </div>
+
+    <script>
+    function log() {
+        if (!console) {
+            return;
+        }
+        console.log.apply(console, arguments);
+    }
+    var endpoint = "{{ create_endpoint }}";
+    var createForm = document.getElementById("create-message");
+    createForm.onsubmit = function (event) {
+        var message = createForm.message.value;
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', endpoint + '/posts');
+        xhr.send(JSON.stringify({
+            message: message
+        }));
+        xhr.onload = function (data) {
+            log("success!");
+            location.reload();
+        };
+        xhr.onerror = function (error) {
+            log("error", error);
+        };
+        return false;
+    };
+
+    var deleteButtons = document.querySelectorAll('.posts .delete-button');
+    for (var i = 0; i < deleteButtons.length; i++) {
+        (function (deleteButton) {
+            deleteButton.onclick = function (event) {
+                var postId = deleteButton.getAttribute('data-post-id');
+                if (postId) {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('DELETE', endpoint + '/posts/' + postId);
+                    xhr.send(null);
+                    xhr.onload = function (data) {
+                        log("success!");
+                        location.reload();
+                    };
+                    xhr.onerror = function (error) {
+                        log("error", error);
+                    };
+                }
+                return false;
+            }
+        }(deleteButtons[i]));
+    }
+    </script>
 </body>
 <html>

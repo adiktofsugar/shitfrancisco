@@ -38,26 +38,32 @@ function writeTemplateLocal(contents, callback) {
     fs.writeFile(projectRoot + '/public/index.html', contents, callback);
 }
 
+var createEndpointLocal = 'http://localhost:8000';
+var createEndpointRemote = 'https://99dlan2zfj.execute-api.us-west-2.amazonaws.com/prod';
+
 module.exports = function (isLocal, callback) {
     if (callback === undefined) {
         callback = isLocal;
         isLocal = false;
     }
-    console.log("getting index template");
+    console.log("getting " + (isLocal ? "local" : "remote") + " index template");
     var getTemplate = isLocal ? getTemplateLocal : getTemplateRemote;
     getTemplate(function (error, body) {
         if (error) return callback(error);
         nunjucks.configure({
             autoescape: true
         });
-        console.log("getting remote posts");
         postsUpdater.get(isLocal, function (error, posts) {
             if (error) return callback(error);
-            console.log("posts - " + JSON.stringify(posts, null, 4));
+            var createEndpoint = isLocal ? createEndpointLocal : createEndpointRemote;
+            if (posts && !posts.length) {
+                posts = null;
+            }
             var indexContents = nunjucks.renderString(body, {
-                posts: posts
+                posts: posts,
+                create_endpoint: createEndpoint
             });
-            console.log("writing remote index");
+            console.log("writing " + (isLocal ? "local" : "remote") + " index");
             var writeTemplate = isLocal ? writeTemplateLocal : writeTemplateRemote;
             writeTemplate(indexContents, callback);
         });

@@ -16,4 +16,5 @@ aws s3 website s3://shitfrancisco/ \
 
 aws s3 sync "$project_root/public" s3://shitfrancisco/\
     --exclude "index.html"\
+    --exclude "posts.yaml"\
     --acl public-read

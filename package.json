@@ -4,18 +4,26 @@
   "description": "shit francisco says s3 blog",
   "main": "index.js",
   "scripts": {
-    "aws-install": "./scripts/aws-install.sh",
-    "build": "node scripts/build.js",
-    "test": "node scripts/test-lambda.js",
-    "deploy": "npm run build aws-install"
+    "build": "./scripts/build.js",
+    "start": "forever start -w --watchIgnore 'public/**' server.js",
+    "stop": "forever stopall",
+    "log": "forever logs -f server.js",
+    "dev": "npm run build; npm run stop; npm run start; npm run log",
+    "prod": "./scripts/aws-install-assets.sh; ./scripts/aws-install-lambdas.sh; ./scripts/build.js -r"
   },
   "author": "Sean McCollum <anincrediblyshortname@gmail.com>",
   "license": "ISC",
   "devDependencies": {
+    "archiver": "^0.16.0",
     "async": "^1.5.0",
     "aws-sdk": "^2.2.18",
+    "forever": "^0.15.1",
+    "glob": "^6.0.1",
     "js-yaml": "^3.4.3",
+    "jszip": "^2.5.0",
+    "mime": "^1.3.4",
     "minimist": "^1.2.0",
+    "mkdirp": "^0.5.1",
     "nunjucks": "^2.1.0"
   }
 }
