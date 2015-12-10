@@ -3,6 +3,7 @@
 <head>
     <title>Shit Francisco says</title>
     <link rel="stylesheet" href="shared/style.css" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 </head>
 <body>
     <div class="title">
@@ -13,7 +14,7 @@
         <ul>
             {% for post in posts %}
             <li>
-                <a href="#" data-post-id="{{ post.id }}" class="delete-button">[x]</a>
+                <a href="#" data-post-id="{{ post.id }}" class="delete-button hidden">[x]</a>
                 <date>{{ post.date }}</date>
                 <p>{{ post.message }}</p>
             </li>
@@ -56,9 +57,13 @@
         return false;
     };
 
+    var showDeleteButtons = Boolean(location.search.match(/delete/));
     var deleteButtons = document.querySelectorAll('.posts .delete-button');
     for (var i = 0; i < deleteButtons.length; i++) {
         (function (deleteButton) {
+            if (showDeleteButtons) {
+                deleteButton.className = deleteButton.className.replace('hidden', '');
+            }
             deleteButton.onclick = function (event) {
                 var postId = deleteButton.getAttribute('data-post-id');
                 if (postId) {

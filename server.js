@@ -114,7 +114,9 @@ http.createServer(function (req, res) {
                 res.cors().json(post).end();
             });
         });
-        
+        request('/', 'get', function (req, res) {
+            res.cors().end('yoyoyo');
+        });
         request('', 'options', function (req, res) {
             res.cors().end();
         });

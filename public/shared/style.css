@@ -76,3 +76,7 @@ body {
 .add button:focus {
     background: #e90;
 }
+
+.delete-button.hidden {
+    display: none;
+}
