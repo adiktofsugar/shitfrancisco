@@ -6,6 +6,7 @@
   "scripts": {
     "start": "webpack serve",
     "build": "NODE_ENV=production webpack",
+    "deploy": "node ./scripts/deploy.mjs",
     "postinstall": "./scripts/postinstall.sh",
     "fix": "concurrently -g \"npm:lint:*(!ts|pr) -- --fix\" \"npm:lint:pr -- --write\"",
     "lint": "concurrently -g npm:lint:*",
@@ -17,6 +18,7 @@
   "author": "Sean McCollum <anincrediblyshortname@gmail.com>",
   "license": "ISC",
   "devDependencies": {
+    "@aws-sdk/client-s3": "^3.501.0",
     "@babel/core": "^7.23.7",
     "@babel/preset-env": "^7.23.8",
     "@babel/preset-react": "^7.23.3",
@@ -37,9 +39,11 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "html-webpack-plugin": "^5.6.0",
     "jest": "^29.7.0",
+    "mime": "^4.0.1",
     "npm-upgrade": "^3.1.0",
     "prettier": "^3.2.4",
     "typescript": "^5.3.3",
+    "walkdir": "^0.4.1",
     "webpack": "^5.90.0",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1"
