@@ -4,7 +4,7 @@ import getLoginErrorMessage from "./getLoginErrorMessage";
 
 export default fromPromise(async () => {
   const url = new URL(location.href);
-  if (url.pathname === "/auth/sign-in") {
+  if (url.pathname === "/sign-in.html") {
     const {
       expires_in: expiresIn,
       id_token: token,
@@ -26,10 +26,16 @@ export default fromPromise(async () => {
       expiration,
     };
     localStorage.setItem("token", JSON.stringify(user));
-  } else if (url.pathname === "/auth/sign-out") {
-    localStorage.removeItem("token");
+    location.assign("/");
+    return null;
   }
-  history.replaceState(null, "", "/");
+
+  if (url.pathname === "/sign-out.html") {
+    localStorage.removeItem("token");
+    location.assign("/");
+    return null;
+  }
+
   const existing = localStorage.getItem("token");
   if (existing) {
     return /** @type {UserContext} */ (JSON.parse(existing));

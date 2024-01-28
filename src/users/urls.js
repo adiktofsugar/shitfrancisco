@@ -8,7 +8,7 @@ loginUrl.searchParams.set("client_id", CLIENT_ID);
 // loginUrl.searchParams.set("scope", "openid");
 loginUrl.searchParams.set(
   "redirect_uri",
-  new URL("/auth/sign-in", window.location.href).href,
+  new URL("/sign-in.html", window.location.href).href
 );
 
 // https://docs.aws.amazon.com/cognito/latest/developerguide/logout-endpoint.html
@@ -16,7 +16,7 @@ const logoutUrl = new URL(`https://${DOMAIN}/logout`);
 logoutUrl.searchParams.set("client_id", CLIENT_ID);
 logoutUrl.searchParams.set(
   "logout_uri",
-  new URL("/auth/sign-out", window.location.href).href,
+  new URL("/sign-out.html", window.location.href).href
 );
 
 export { loginUrl, logoutUrl };
