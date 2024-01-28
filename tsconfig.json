@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "@emotion/react",
+    "target": "ES2022",
+    "module": "NodeNext",
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+  },
+}
